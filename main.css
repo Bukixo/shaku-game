@@ -1,0 +1,13 @@
+
+div {
+    /* background: palevioletred; */
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.oldclass { 
+    color: blue 
+}
+.newclass { 
+    background: yellow
+ }
