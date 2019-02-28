@@ -3,11 +3,18 @@ div {
     /* background: palevioletred; */
     display: inline-block;
     border: 1px solid black;
+    background: pink;
 }
 
-.oldclass { 
+/* .oldclass { 
     color: blue 
-}
+} */
 .newclass { 
-    background: yellow
+    animation: example 1s ;
  }
+
+ @keyframes example {
+    0%   {background-color: pink;}
+    50% {background-color: black;}
+    100% {background-color: pink;}
+  }
