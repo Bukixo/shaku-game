@@ -1,24 +1,26 @@
 console.log("app works")
 const colourId = ['one','two','three'];
 const level = 5
+const button = document.getElementsByTagName('button')
 
 const playerArray = []
 
-function something(){
-  while (playerArray.length < level) {
-    function playerClick(button_id) //the id from the html is sent back and we are able to make sure of it in the playerClick function
-    {
-      
-        //console.log(x);
-      playerArray.push(button_id)
-      console.log(playerArray)
+function playerClick(button_id) //the id from the html is sent back and we are able to make sure of it in the playerClick function
+{
+  // while (playerArray.length < level) 
+    //console.log(x);
+  playerArray.push(button_id)
+  console.log(playerArray)
+  if (playerArray.length === 3) {
+    console.log('STOP MAN')
+    for (let index = 0; index < button.length; index++) {
+      button[index].disabled = true; 
     }
   }
-  
 }
 
+//getElementsByTagName returns an array objects
 
-console.log("dun fam")
 function loopingColours(array) {
   const newArray = [];
 
