@@ -1,6 +1,6 @@
 console.log("app works")
-const colourId = [0, 1, 2];
-const level = 5;
+const colourId = ['0', '1', '2'];
+const level = 3;
 const button = document.getElementsByTagName('button')
 const scoreBoard = document.getElementsByClassName('score-board')
 const points = 0;
@@ -9,8 +9,6 @@ const playerArray = [] // explain scope abit - the fact that we define the array
 const cleanedPlayerArray = [];
 function playerClick(button_id) //the id from the html is sent back and we are able to make sure of it in the playerClick function
 {
-  // while (playerArray.length < level) 
-    //console.log(x);
   playerArray.push(button_id)
   console.log('player array', playerArray)
   if (playerArray.length === 3) {
@@ -61,10 +59,10 @@ function compareScore(a,b){
   //     return parseInt(x, 10)});
   const cleanedPlayerArray = playerArray.map(Number);
   console.log('mapped array', cleanedPlayerArray, 'vs',computerArray )
- if (cleanedPlayerArray === computerArray) {
-  console.log('player lost')
+ if (JSON.stringify(cleanedPlayerArray) === JSON.stringify(computerArray)) {
+  console.log('player won')
  } else {
-   console.log('player won')
+   console.log('player lost')
  }
 }
 
