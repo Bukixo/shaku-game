@@ -2,9 +2,11 @@ console.log("app works")
 const colourId = ['one','two','three'];
 const level = 3;
 const button = document.getElementsByTagName('button')
+const scoreBoard = document.getElementsByClassName('score-board')
+const points = 0;
 const computerArray = [];
 const playerArray = [] // explain scope abit - the fact that we define the arrays outside the functions means that we are able to use it inside and outside functions
-
+const cleanedPlayerArray = [];
 function playerClick(button_id) //the id from the html is sent back and we are able to make sure of it in the playerClick function
 {
   // while (playerArray.length < level) 
@@ -47,20 +49,31 @@ function loopingColours(array) {
   }
 }
 
-
-
-
-
 function gamePlay() {
   loopingColours(colourId)
   console.log('returned player Array', playerArray, 'the computer Array ', computerArray);
   //test(colourId)
+  compareScore(playerArray,computerArray)
 }
+
+function compareScore(a,b){
+  const cleanedPlayerArray = playerArray.map(Number);
+  console.log('mapped array', cleanedPlayerArray)
+ if (playerArray === computerArray) {
+  function playerScore(points) {
+    points ++
+    console.log('player won',`${points}`);
+  } 
+ } console.log('player not won', `${points}`);
+}
+
+
 
 
 //create a players array that collects all the ids from the buttons that player has clicked on - done
 //loop over the array x times and apply the style into the div x times - done 
-// save index into the new array that will be used to compared to player (automatedSequenceArray)
+// save index into the new array 
+//that will be used to compared to player (automatedSequenceArray)
 //use the new array to compare the users input (userSequenceArray)
 //if it matches excatly the user gets a point and it will be stored in their points array (pointsArray)
 //once user has entered their input, timer goes off again repeating the loopingColours function
