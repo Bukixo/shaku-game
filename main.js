@@ -1,6 +1,6 @@
 console.log("app works")
-const colourId = ['one','two','three'];
-const level = 3;
+const colourId = [0, 1, 2];
+const level = 5;
 const button = document.getElementsByTagName('button')
 const scoreBoard = document.getElementsByClassName('score-board')
 const points = 0;
@@ -19,30 +19,28 @@ function playerClick(button_id) //the id from the html is sent back and we are a
       button[index].disabled = true; 
     }
   }
-}
+} 
 
 //getElementsByTagName returns an array objects
 
 function loopingColours(array) {
-
   arrayLength = array.length
 
-  for(var i = 0; i < level; i++){
+  for(let i = 0; i < level; i++){
 
     const randomID = Math.floor(Math.random()*array.length);
 
     (function(i){
         setTimeout(function(){
         document.getElementById(array[randomID]).className = 'newclass';
-        computerArray.push(randomID); // adds the class
-
+       
         setTimeout(function(){
           document.getElementById(array[randomID]).classList.remove('newclass');
           }, 1000); // removes the class 
 
         }, 2000 * (i)); /// delays the timer
 
-        computerArray.push(randomID);
+        computerArray.push(randomID); // adds the class
         console.log('Computer Array ', computerArray);
 
     })(i); //the i picks up the from the for loop and initalliy sety it to a 
@@ -51,20 +49,28 @@ function loopingColours(array) {
 
 function gamePlay() {
   loopingColours(colourId)
-  console.log('returned player Array', playerArray, 'the computer Array ', computerArray);
+  // console.log('returned player Array', playerArray, 'the computer Array ', computerArray);
   //test(colourId)
-  compareScore(playerArray,computerArray)
+  
 }
 
 function compareScore(a,b){
+  //const cleanedPlayerArray = playerArray.map(parseInt) with this example you get ie [1,NAN,NAN] returned in 
+  // const cleanedPlayerArray = playerArray.map(
+  //   function(x){ 
+  //     return parseInt(x, 10)});
   const cleanedPlayerArray = playerArray.map(Number);
-  console.log('mapped array', cleanedPlayerArray)
- if (playerArray === computerArray) {
-  function playerScore(points) {
-    points ++
-    console.log('player won',`${points}`);
-  } 
- } console.log('player not won', `${points}`);
+  console.log('mapped array', cleanedPlayerArray, 'vs',computerArray )
+ if (cleanedPlayerArray === computerArray) {
+  console.log('player lost')
+ } else {
+   console.log('player won')
+ }
+}
+
+function testGame(){
+  compareScore(playerArray,computerArray);
+  
 }
 
 
