@@ -53,13 +53,9 @@ function gamePlay() {
 }
 
 function compareScore(a,b){
-  //const cleanedPlayerArray = playerArray.map(parseInt) with this example you get ie [1,NAN,NAN] returned in 
-  // const cleanedPlayerArray = playerArray.map(
-  //   function(x){ 
-  //     return parseInt(x, 10)});
   const cleanedPlayerArray = playerArray.map(Number);
   console.log('mapped array', cleanedPlayerArray, 'vs',computerArray )
- if (JSON.stringify(cleanedPlayerArray) === JSON.stringify(computerArray)) {
+ if (JSON.stringify(cleanedPlayerArray) === JSON.stringify(computerArray)) { //very simple way to check if arrays are the same as we are only working with very basic arrays.
   console.log('player won')
  } else {
    console.log('player lost')
