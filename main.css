@@ -6,6 +6,9 @@ button {
     background: pink;
 }
 
+span {
+    border: 1px blue solid;
+}
 /* .oldclass { 
     color: blue 
 } */
