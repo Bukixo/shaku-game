@@ -2,20 +2,21 @@ console.log("app works")
 const colourId = ['0', '1', '2'];
 const level = 3;
 const button = document.getElementsByTagName('button')
-const scoreBoard = document.getElementsByClassName('score-board')
+const scoreBoard = document.getElementById('scoreBoard')
 const points = 0;
 const computerArray = [];
 const playerArray = [] // explain scope abit - the fact that we define the arrays outside the functions means that we are able to use it inside and outside functions
 const cleanedPlayerArray = [];
-function playerClick(button_id) //the id from the html is sent back and we are able to make sure of it in the playerClick function
-{
+
+
+function playerClick(button_id){ //the id from the html is sent back and we are able to make sure of it in the playerClick function
   playerArray.push(button_id)
   console.log('player array', playerArray)
   if (playerArray.length === 3) {
     console.log('STOP MAN')
-    for (let index = 0; index < button.length; index++) {
-      button[index].disabled = true; 
-    }
+    // for (let index = 0; index < button.length; index++) {
+    //   button[index].disabled = true; 
+    // }
   }
 } 
 
@@ -52,12 +53,15 @@ function gamePlay() {
   
 }
 
-function compareScore(a,b){
+function compareScore(arr1, arr2){
   const cleanedPlayerArray = playerArray.map(Number);
   console.log('mapped array', cleanedPlayerArray, 'vs',computerArray )
  if (JSON.stringify(cleanedPlayerArray) === JSON.stringify(computerArray)) { //very simple way to check if arrays are the same as we are only working with very basic arrays.
+  const addedPoints = points + 1
+  scoreBoard.innerText = addedPoints;
   console.log('player won')
  } else {
+  scoreBoard.innerText= addedPoints;
    console.log('player lost')
  }
 }
@@ -66,8 +70,6 @@ function testGame(){
   compareScore(playerArray,computerArray);
   
 }
-
-
 
 
 //create a players array that collects all the ids from the buttons that player has clicked on - done
