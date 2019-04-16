@@ -8,6 +8,7 @@ const score = 0;
 const computerArray = [];
 const playerArray = [] // explain scope abit - the fact that we define the arrays outside the functions means that we are able to use it inside and outside functions
 const cleanedPlayerArray = [];
+let time = 60;
 
 
 function playerClick(button_id) { //the id from the html is sent back and we are able to make sure of it in the playerClick function
@@ -68,15 +69,25 @@ function testGame() {
 
 /// timer function//
 
-function timer() {
-    for (let index = 0; index < 11; index++) {
-      setTimeout(() => {
-        console.log(index)
-      }, index * 1000);
-    
-    }
-}
+// function timer() {
+//   for (let index = 0; index < 61; index++) {
+//     for (let x = 61; x > 61; x - 1 ) {
+//       setTimeout(() => {
+//         console.log(x)
+//         }, index * 1000);
+//     } 
+//   }
+// }
 
+function timer() {
+  
+    setInterval(() => {	    
+      time--
+      console.log(time)	           
+
+     }, 1000);	   
+  
+}
 
 
 
