@@ -13,15 +13,31 @@ const count = document.getElementById('count')
 let counter = 5
 
 function playerClick(button_id) { //the id from the html is sent back and we are able to make sure of it in the playerClick function
+  //button[index].disabled = false; 
+  
   playerArray.push(button_id)
   console.log('player array', playerArray)
-  if (playerArray.length === 3) {
+  if (playerArray.length === level) {
     console.log('STOP MAN')
-    
-    // for (let index = 0; index < button.length; index++) {
-    //   button[index].disabled = true; 
-    // }
+    for (let index = 0; index < button.length; index++) {
+      button[index].disabled = true; 
+    }
+    compareScore(computerArray, playerArray)
+    playerArray = []
+    console.log('new array', playerArray)
   }
+}
+
+function disableButtons(callback){
+  for (let index = 0; index < button.length; index++) {
+    button[index].disabled = true; 
+  } 
+  setTimeout(() => {
+    for (let index = 0; index < button.length; index++) {
+      button[index].disabled = false; 
+    }
+  }, level * 1000);
+  callback()
 }
 
 //getElementsByTagName returns an array objects
@@ -36,15 +52,15 @@ function loopingColours(array, arr2) {
 
         setTimeout(function () {
           document.getElementById(array[randomID]).classList.remove('newclass');
-        }, 1000); // removes the class  
+        }, 2000); // removes the class  
 
       }, 1000 * (i)); /// delays the timer
 
       arr2.push(randomID); // adds the class
       console.log('Computer Array ', arr2);
-
     })(i); //the i picks up the from the for loop and initalliy set it to a 
   }
+  arr2 = []
 }
 
 
@@ -54,7 +70,6 @@ function compareScore(arr1, arr2) {
   if (JSON.stringify(cleanedPlayerArray) === JSON.stringify(arr1)) { //very simple way to check if arrays are the same as we are only working with very basic arrays.
     const score = points + 1
     scoreBoard.innerText = score;
- 
     console.log('player won')
   } else {
     scoreBoard.innerText = score;
@@ -66,20 +81,19 @@ function compareScore(arr1, arr2) {
 
 
 /// timer function//
-function timerFunction() {
-
-  const startTimer = 
-    setInterval(() => {	    
-    timer--
-    count.innerText = "Timer: " + timer;
-    console.log(timer)
-    if (timer === 0) {
-      // count.innerText = timer;
-      console.log('Stop Timer');
-      clearInterval(startTimer);
-    }	           
-   }, 1000);	 
-}
+// function timerFunction() {
+//   const startTimer = 
+//     setInterval(() => {	    
+//     timer--
+//     count.innerText = "Timer: " + timer;
+//     console.log(timer)
+//     if (timer === 0) {
+//       // count.innerText = timer;
+//       console.log('Stop Timer');
+//       clearInterval(startTimer);
+//     }	           
+//    }, 1000);	 
+// }
 
 
 //countdown
@@ -94,17 +108,11 @@ function timerFunction() {
 //   }
 // }, 1000);
 
-function computerPlay() {
-  loopingColours(colourId)
-}
 
 function startGame() {
   loopingColours(colourId, computerArray)
 }
 
-function scoreCalculation(){
-  compareScore(computerArray, playerArray)
-}
 
 //1 .create a players array that collects all the ids from the buttons that player has clicked on - done
 // 2. loop over the array x times and apply the style into the div x times - done 
