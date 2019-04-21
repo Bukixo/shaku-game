@@ -6,16 +6,18 @@ const scoreBoard = document.getElementById('scoreBoard')
 const points = 0;
 const score = 0;
 const computerArray = [];
-const playerArray = [] // explain scope abit - the fact that we define the arrays outside the functions means that we are able to use it inside and outside functions
+let playerArray = [] // explain scope abit - the fact that we define the arrays outside the functions means that we are able to use it inside and outside functions
 const cleanedPlayerArray = [];
-let time = 4; //set the varibale as a let rather than a const because a value that cannot be altered by the program during normal execution
-// const timer = document.getElementById('timer')
+let timer = 4; //set the varibale as a let rather than a const because a value that cannot be altered by the program during normal execution
+const count = document.getElementById('count')
+let counter = 5
 
 function playerClick(button_id) { //the id from the html is sent back and we are able to make sure of it in the playerClick function
   playerArray.push(button_id)
   console.log('player array', playerArray)
   if (playerArray.length === 3) {
     console.log('STOP MAN')
+    
     // for (let index = 0; index < button.length; index++) {
     //   button[index].disabled = true; 
     // }
@@ -24,7 +26,7 @@ function playerClick(button_id) { //the id from the html is sent back and we are
 
 //getElementsByTagName returns an array objects
 
-function loopingColours(array) {
+function loopingColours(array, arr2) {
   arrayLength = array.length
   for (let i = 0; i < level; i++) {
     const randomID = Math.floor(Math.random() * array.length);
@@ -36,61 +38,73 @@ function loopingColours(array) {
           document.getElementById(array[randomID]).classList.remove('newclass');
         }, 1000); // removes the class  
 
-      }, 5000 * (i)); /// delays the timer
+      }, 1000 * (i)); /// delays the timer
 
-      computerArray.push(randomID); // adds the class
-      console.log('Computer Array ', computerArray);
+      arr2.push(randomID); // adds the class
+      console.log('Computer Array ', arr2);
 
     })(i); //the i picks up the from the for loop and initalliy set it to a 
   }
 }
 
-function gamePlay() {
-  loopingColours(colourId)
-}
 
 function compareScore(arr1, arr2) {
-  const cleanedPlayerArray = playerArray.map(Number);
-  console.log('mapped array', cleanedPlayerArray, 'vs', computerArray)
-  if (JSON.stringify(cleanedPlayerArray) === JSON.stringify(computerArray)) { //very simple way to check if arrays are the same as we are only working with very basic arrays.
+  const cleanedPlayerArray = arr2.map(Number);
+  console.log('mapped array', cleanedPlayerArray, 'vs', arr1)
+  if (JSON.stringify(cleanedPlayerArray) === JSON.stringify(arr1)) { //very simple way to check if arrays are the same as we are only working with very basic arrays.
     const score = points + 1
     scoreBoard.innerText = score;
+ 
     console.log('player won')
   } else {
     scoreBoard.innerText = score;
     console.log('player lost')
+    
   }
 }
 
-function testGame() {
-  compareScore(playerArray, computerArray);
 
-}
 
 /// timer function//
+function timerFunction() {
 
-
-    
-
-
-
-function timer() {
   const startTimer = 
     setInterval(() => {	    
-    time--
-    console.log(time)
-    if (time === 0) {
+    timer--
+    count.innerText = "Timer: " + timer;
+    console.log(timer)
+    if (timer === 0) {
+      // count.innerText = timer;
       console.log('Stop Timer');
       clearInterval(startTimer);
     }	           
-   }, 1000);	
-   
+   }, 1000);	 
 }
 
 
+//countdown
 
+// const countdown = 
+// setInterval(() => {
+//   counter--
+//   console.log(counter)
+//   if (counter === 0) {
+//     loopingColours(colourId)
+//     clearInterval(computerPlay)
+//   }
+// }, 1000);
 
+function computerPlay() {
+  loopingColours(colourId)
+}
 
+function startGame() {
+  loopingColours(colourId, computerArray)
+}
+
+function scoreCalculation(){
+  compareScore(computerArray, playerArray)
+}
 
 //1 .create a players array that collects all the ids from the buttons that player has clicked on - done
 // 2. loop over the array x times and apply the style into the div x times - done 
@@ -98,7 +112,7 @@ function timer() {
 // 4.that will be used to compared to player (automatedSequenceArray) done
 // 5.use the new array to compare the users input (userSequenceArray) done
 // 6.if it matches excatly the user gets a point and it will be stored in their points array (scores) done
-// 7.create a timer that once user clicks on button timer starts and print the timer on the ui
+// 7.create a timer that once user clicks on button timer starts and print the timer on the ui done
 // 8.during the timer once a comparison between the player and comp has been made and point has been calculated, empty the arrays
 // 9.once arrays has been emptied repeat 3 - 6 until timer is complete then break loop
 // 10. print overall score
